@@ -102,7 +102,7 @@ let to_string x =
 let to_json : type a . a t -> Yojson.Safe.t = fun attribute ->
   let key_json = P11_attribute_type.to_string (fst attribute) in
   let data = P11_hex_data.to_yojson in
-  let value_json =
+  let value_json : Yojson.Safe.t =
     match repr (fst attribute), snd attribute with
     | Repr_object_class, param -> P11_object_class.to_yojson param
     | Repr_bool, param -> `String (bool_to_string param)
